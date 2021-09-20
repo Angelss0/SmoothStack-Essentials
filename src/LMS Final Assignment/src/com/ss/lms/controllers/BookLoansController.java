@@ -1,5 +1,6 @@
 package com.ss.lms.controllers;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -66,15 +67,19 @@ public class BookLoansController extends Controller<BookLoans> {
             borrower.getCardNo(),
         });
     }
-    
-    // TODO: Update Methods
-    public void updateBook(BookLoans bookLoan, Book book) throws SQLException {
-        update(new String[] {
-            
-        }, new String[] {
 
+    public void updateDueDate(BookLoans bookLoan, Date dueDate) throws SQLException {
+        update(new String[] {
+            "dueDate",
+        }, new String[] {
+            "bookId",
+            "branchId",
+            "cardNo"
         }, new Object[] {
-            
+            dueDate,
+            bookLoan.getBook().getBookID(),
+            bookLoan.getBranch().getID(),
+            bookLoan.getBorrower().getCardNo()
         });
     }
 }

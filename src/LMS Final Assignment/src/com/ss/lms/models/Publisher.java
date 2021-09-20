@@ -19,14 +19,7 @@ public class Publisher implements IModel {
     public void setPhone(String phone) { this.phone = phone; }
 
     @Override
-    public String toString() {
-        return "Publisher - ID: " + getID() + ", Name: " + getName() + ", address" + getAddress() + ", phone: " + getPhone();
-    }
-    @Override
     public String getMenuRep() {
         return getName() + ", " + getAddress();
     }
-
-    @Override
-    public String getShortName() { return "Publisher"; }
 }

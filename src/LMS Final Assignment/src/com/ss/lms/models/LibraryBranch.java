@@ -26,16 +26,11 @@ public class LibraryBranch implements IModel {
 
     @Override
     public String toString() {
-        return "Branch - ID: " + getID() +
-        ", name: " + getName() +
-        ", address:" + getAddress();
+        return getName() + ", " + getAddress();
     }
 
     @Override
     public String getMenuRep() {
         return getName() + ", " + getAddress();
     }
-        
-    @Override
-    public String getShortName() { return "Library Branch"; }
 }

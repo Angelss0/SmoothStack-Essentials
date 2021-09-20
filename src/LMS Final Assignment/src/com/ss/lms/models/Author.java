@@ -15,13 +15,7 @@ public class Author implements IModel {
 
     public List<BookAuthors> getBookAuthors() { return bookAuthors; }
     public void setBookAuthors(List<BookAuthors> bookAuthors) { this.bookAuthors = bookAuthors; }
-
-    @Override
-    public String toString() { return getName(); }
     
     @Override
     public String getMenuRep() { return getName(); }
-    
-    @Override
-    public String getShortName() { return "Author"; }
 }

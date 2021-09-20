@@ -15,19 +15,9 @@ public class BookCopies implements IModel {
     public void setNoOfCopies(int noOfCopies) { this.noOfCopies = noOfCopies; }
 
     @Override
-    public String toString() {
-        return "Copies: - Book: " + getBook() +
-        ", Branch: " + getBranch() +
-        ", Copies: " + getNoOfCopies() + "\n";
-    }  
-
-    @Override
     public String getMenuRep() {
         return getBook().getTitle() + " by " +
         (getBook().getAuthor() != null ? getBook().getAuthor().getName() : "N/A")
         + " (" + getNoOfCopies() + ")";
     }
-        
-    @Override
-    public String getShortName() { return "Book Copy"; }
 }

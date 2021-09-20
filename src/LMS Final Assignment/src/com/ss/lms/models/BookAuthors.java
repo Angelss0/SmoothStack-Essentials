@@ -1,6 +1,6 @@
 package com.ss.lms.models;
 
-public class BookAuthors implements IModel {
+public class BookAuthors {
     private Book book;
     private Author author;
 
@@ -9,13 +9,4 @@ public class BookAuthors implements IModel {
 
     public Author getAuthor() { return author; }
     public void setAuthor(Author author) { this.author = author; }
-
-    @Override
-    public String getMenuRep() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-        
-    @Override
-    public String getShortName() { return "Book Author"; }
 }

@@ -33,8 +33,8 @@ public class BookAuthorsController extends Controller<BookAuthors> {
             "bookId",
             "authorId"
         }, new Object[] {
-            bookAuthor.getBook(),
-            bookAuthor.getAuthor(),
+            bookAuthor.getBook().getBookID(),
+            bookAuthor.getAuthor().getID(),
         });
     }
     

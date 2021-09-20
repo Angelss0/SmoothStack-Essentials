@@ -1,6 +1,6 @@
 package com.ss.lms.models;
 
-public class BookGenres implements IModel {
+public class BookGenres {
     private Genre genre;
     private Book book;
 
@@ -9,13 +9,4 @@ public class BookGenres implements IModel {
 
     public Book getBook() { return book; }
     public void setBook(Book book) { this.book = book; }
-
-    @Override
-    public String getMenuRep() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getShortName() { return "Book Genre"; }
 }

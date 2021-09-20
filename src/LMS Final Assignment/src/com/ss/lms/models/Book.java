@@ -31,7 +31,7 @@ public class Book implements IModel {
     @Override
     public String toString() {
         return "  " + getTitle() + "\n  "
-        + (getAuthor() != null ? getAuthor() : "No author") + "\n  "
+        + (getAuthor() != null ? getAuthor().getMenuRep() : "No author") + "\n  "
         + (getGenres() != null ? getGenres().toString() : "no genres") + "\n  "
         + (getPublisher() != null ? getPublisher().getName() : "no publisher") + "\n";
     }
@@ -40,7 +40,4 @@ public class Book implements IModel {
     public String getMenuRep() {
         return getTitle() + " by " + (getAuthor() != null ? getAuthor().getName() : "N/A");
     }
-        
-    @Override
-    public String getShortName() { return "Book"; }
 }

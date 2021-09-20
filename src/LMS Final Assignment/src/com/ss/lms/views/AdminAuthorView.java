@@ -26,6 +26,7 @@ public class AdminAuthorView extends View implements IAdminModel {
             authorController.add(author);
 
             ConnectionsManager.getConnection().commit();
+            System.out.println("Successfully added an Author!");
         } catch (SQLException e) {
             ConnectionsManager.rollbackConnection();
         }
@@ -46,6 +47,7 @@ public class AdminAuthorView extends View implements IAdminModel {
             if (name != null) { authorController.updateName(author, name); }
             
             ConnectionsManager.getConnection().commit();
+            System.out.println("Successfully updated the Author!");
         } catch (SQLException e) {
             ConnectionsManager.rollbackConnection();
         }
@@ -66,7 +68,6 @@ public class AdminAuthorView extends View implements IAdminModel {
             authorController.delete(author);
             
             ConnectionsManager.getConnection().commit();
-
             System.out.println("Successfully deleted the Author!");
         } catch (SQLException e) {
             e.printStackTrace();

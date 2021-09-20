@@ -62,7 +62,7 @@ public class BookController extends Controller<Book> {
         });
     }
 
-    public void updateTitle(Book book, int bookTitle) throws SQLException {
+    public void updateTitle(Book book, String bookTitle) throws SQLException {
         update(new String[] {
             "title"
         }, new String[] {

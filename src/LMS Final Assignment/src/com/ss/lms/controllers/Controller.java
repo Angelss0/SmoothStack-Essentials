@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import com.ss.lms.util.ConnectionsManager;
 
@@ -16,9 +17,7 @@ public abstract class Controller<T> {
 
     protected String tableName;
 
-    public Controller() {
-
-    }
+    public Controller() {}
 
     public Connection getConnection() throws SQLException {
         return ConnectionsManager.getConnection();
@@ -47,8 +46,6 @@ public abstract class Controller<T> {
         var preparedStatement = getConnection().prepareStatement("INSERT INTO " + tableName +" VALUES (" + stringJoiner.toString() + ")");
         setPreparedStatementArgs(preparedStatement, args);
         
-        System.out.println(preparedStatement.toString());
-
         preparedStatement.executeUpdate();
     }
 
@@ -108,6 +105,26 @@ public abstract class Controller<T> {
         return list;
     }
 
+    public void refreshFromList(List<T> tList, Predicate<T> filterType) throws SQLException {
+        readAll().stream()
+            .filter(filterType)
+            .forEach((tObject) -> {
+                try {
+                    delete(tObject);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            });
+        
+        tList.forEach((tObject) -> {
+            try {
+                add(tObject);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public int getMinFreeId(Function<T, Integer> getter) throws SQLException {
         var list = readAll();
         // list.sort((b0, b1) -> b1.getBookID() - b0.getBookID());
@@ -122,7 +139,6 @@ public abstract class Controller<T> {
 
     public abstract void add(T t) throws SQLException;
     public abstract void delete(T t) throws SQLException;
-    // public abstract List<T> find(T t) throws SQLException;
 
     protected abstract T extractModel(ResultSet rs) throws SQLException;
 }

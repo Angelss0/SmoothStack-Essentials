@@ -35,6 +35,7 @@ public class AdminPublisherView extends View implements IAdminModel {
             publisherController.add(publisher);
 
             ConnectionsManager.getConnection().commit();
+            System.out.println("Successfully added a publisher!");
         } catch (SQLException e) {
             ConnectionsManager.rollbackConnection();
         }
@@ -61,6 +62,7 @@ public class AdminPublisherView extends View implements IAdminModel {
             if (phone != null) { publisherController.updatePhone(publisher, phone); }
             
             ConnectionsManager.getConnection().commit();
+            System.out.println("Updated a publisher!");
         } catch (SQLException e) {
             ConnectionsManager.rollbackConnection();
         }
@@ -81,8 +83,7 @@ public class AdminPublisherView extends View implements IAdminModel {
             publisherController.delete(publisher);
             
             ConnectionsManager.getConnection().commit();
-
-            System.out.println("Successfully deleted the publisher!");
+            System.out.println("Successfully deleted a publisher!");
         } catch (SQLException e) {
             e.printStackTrace();
             ConnectionsManager.rollbackConnection();
@@ -99,9 +100,9 @@ public class AdminPublisherView extends View implements IAdminModel {
             );
             if (publisher == null) { return returnToAdmin(); }
 
-            System.out.println("Publisher name:\n" + publisher.getName()
-                + "\nAddress:\n" + publisher.getAddress()
-                + "\nPhone Number:\n" + publisher.getPhone()
+            System.out.println("Publisher name: " + publisher.getName()
+                + "\nAddress: " + publisher.getAddress()
+                + "\nPhone Number: " + publisher.getPhone()
                 + "\n\nBooks published:"
             );
             bookController.readAll().stream()
@@ -111,7 +112,8 @@ public class AdminPublisherView extends View implements IAdminModel {
             System.out.println();
         } catch (Exception e) {
             ConnectionsManager.rollbackConnection();
-        }        return returnToAdmin();
+        }
+        return returnToAdmin();
     }
 
     @Override

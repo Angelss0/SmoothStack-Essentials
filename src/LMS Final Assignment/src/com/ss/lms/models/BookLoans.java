@@ -27,13 +27,17 @@ public class BookLoans implements IModel {
 
     public Date getDateIn() { return dateIn; }
     public void setDateIn(Date dateIn) { this.dateIn = dateIn; }
-        
+
+    @Override
+    public String toString() {
+        return "Book: " + getBook().getTitle() + "\n"
+        + "Branch: " + getBranch().getName() + "\n"
+        + "Date Checked out: " + getDateOut().toString() + "\n"
+        + "Date Due: " + getDueDate().toString();
+    }
+    
     @Override
     public String getMenuRep() {
-        // TODO Auto-generated method stub
-        return null;
+        return book.getMenuRep() + ". Loaned by " + getBorrower().getName() +  ", Due: " + getDueDate().toString();
     }
-        
-    @Override
-    public String getShortName() { return "Book loan"; }
 }

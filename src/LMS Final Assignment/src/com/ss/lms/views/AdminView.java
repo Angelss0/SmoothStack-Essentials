@@ -1,16 +1,17 @@
 package com.ss.lms.views;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
 import com.ss.lms.models.*;
+import com.ss.lms.util.ConnectionsManager;
 
 public class AdminView extends View {
     private MainView mainScreen;
+    
     private AdminBooksView booksView = new AdminBooksView(scanner, this);
     private AdminAuthorView authorView = new AdminAuthorView(scanner, this);
     private AdminBorrowerView borrowerView = new AdminBorrowerView(scanner, this);
@@ -24,19 +25,8 @@ public class AdminView extends View {
     }
 
     public IOption admin1() {
-        List<Book> books = new ArrayList<>();
-        
-        try {
-            books = bookController.readAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        var bookRep = new StringJoiner("\n");
-        books.forEach((book) -> bookRep.add(book.toString()));
-
         return optionsMenu(
-            "Welcome, LMS Admin!\n\nBooks in library:\n" + bookRep.toString(),
+            "Welcome, LMS Admin!",
             List.of(
                 "Add/Update/Delete/Read Books",
                 "Add/Update/Delete/Read Authors",
@@ -53,7 +43,7 @@ public class AdminView extends View {
                 () -> adminSelectOperation("Publishers", publisherView),
                 () -> adminSelectOperation("Library Branches", branchView),
                 () -> adminSelectOperation("Borrowers", borrowerView),
-                () -> promter("Overriding a books due date!"),
+                () -> overrideDuedate(),
                 () -> mainScreen.mainScreen()
             )
         );
@@ -76,5 +66,38 @@ public class AdminView extends View {
                 () -> admin1()
             )
         );
+    }
+
+    public IOption overrideDuedate() {
+        try {
+            BookLoans bookLoan = getModelFromController(
+                "Pick which loan to override due date:",
+                loansController
+            );
+            if (bookLoan == null) { return admin1(); }
+
+            String date = "";
+            Date newDate = null;
+            do {
+                date = getInputPromt("Enter new due date (yyyy-[m]m-[d]d): ");
+                if (date != null) {
+                    try {
+                        newDate = Date.valueOf(date);
+                    } catch (Exception e) {
+                        System.out.println("Invalid Date Format!");
+                    }
+                }
+            } while (date.equals(""));
+            if (newDate == null) { return admin1();}
+            loansController.updateDueDate(bookLoan, newDate);
+            
+            ConnectionsManager.getConnection().commit();
+            System.out.println("Successfully overrided due date!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ConnectionsManager.rollbackConnection();
+        }
+
+        return admin1();
     }
 }

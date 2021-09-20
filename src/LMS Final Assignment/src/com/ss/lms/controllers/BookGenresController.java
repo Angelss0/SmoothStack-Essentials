@@ -28,8 +28,8 @@ public class BookGenresController extends Controller<BookGenres> {
             "genre_id",
             "bookId"
         }, new Object[] {
-            bookGenres.getBook().getBookID(),
-            bookGenres.getGenre().getID()
+            bookGenres.getGenre().getID(),
+            bookGenres.getBook().getBookID()
         });
     }
 
@@ -49,8 +49,8 @@ public class BookGenresController extends Controller<BookGenres> {
             "genre_id",
             "bookId"
         }, new Object[] {
-            book.getBookID(),
-            genre.getID()
+            genre.getID(),
+            book.getBookID()
         });
     }
 
@@ -62,8 +62,8 @@ public class BookGenresController extends Controller<BookGenres> {
             "bookId"
         }, new Object[] {
             genre.getID(),
-            bookGenre.getGenre().getID(),
-            bookGenre.getBook().getBookID()
+            bookGenre.getBook().getBookID(),
+            bookGenre.getGenre().getID()
         });
     }
 

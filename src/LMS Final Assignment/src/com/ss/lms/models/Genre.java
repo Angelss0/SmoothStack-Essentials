@@ -17,11 +17,5 @@ public class Genre implements IModel {
     public void setBookGenres(List<BookGenres> bookGenres) { this.bookGenres = bookGenres; }
         
     @Override
-    public String getMenuRep() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-        
-    @Override
-    public String getShortName() { return "Genre"; }
+    public String getMenuRep() { return getName(); }
 }

@@ -31,13 +31,7 @@ public class Borrower implements IModel {
         ", Address " + getAddress() +
         ", Phone " + getPhone();
     }
-        
+
     @Override
-    public String getMenuRep() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-        
-    @Override
-    public String getShortName() { return "Borrower"; }
+    public String getMenuRep() { return getName() + ", Card No." + getCardNo(); }
 }
